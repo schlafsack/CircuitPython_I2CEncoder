@@ -31,7 +31,7 @@ setup(
 
     # Author details
     author='Adafruit Industries',
-    author_email='circuitpython@adafruit.com',
+    author_email='',
 
     install_requires=[
         'Adafruit-Blinka',
