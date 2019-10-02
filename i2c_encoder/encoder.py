@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 """
-`circuitpython_i2cencoder`
+`circuitpython_i2c_encoder`
 ================================================================================
 
 A CircuitPython driver for the DuPPa I2C Encoder v2.1 board.
@@ -50,4 +50,4 @@ Implementation Notes
 # imports
 
 __version__ = "0.0.0-auto.0"
-__repo__ = "https://github.com/schlafsack/CircuitPython_CircuitPython_I2CEncoder.git"
+__repo__ = "https://github.com/schlafsack/CircuitPython_I2CEncoder.git"

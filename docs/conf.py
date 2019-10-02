@@ -109,7 +109,7 @@ html_static_path = ['_static']
 html_favicon = '_static/favicon.ico'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Circuitpython_i2cencoderLibrarydoc'
+htmlhelp_basename = 'CircuitPython_I2CEncoderLibrarydoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 

@@ -5,7 +5,7 @@ https://packaging.python.org/en/latest/distributing.html
 https://github.com/pypa/sampleproject
 """
 
-from setuptools import setup, find_packages
+from setuptools import setup
 # To use a consistent encoding
 from codecs import open
 from os import path
@@ -17,7 +17,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name='adafruit-circuitpython-circuitpython-i2cencoder',
+    name='circuitpython-i2c-encoder',
 
     use_scm_version=True,
     setup_requires=['setuptools_scm'],
@@ -27,14 +27,13 @@ setup(
     long_description_content_type='text/x-rst',
 
     # The project's main homepage.
-    url='https://github.com/adafruit/Adafruit_CircuitPython_CircuitPython_I2CEncoder',
+    url='https://github.com/schlafsack/CircuitPython_I2CEncoder',
 
     # Author details
-    author='Adafruit Industries',
+    author='Tom Greasley',
     author_email='',
 
     install_requires=[
-        'Adafruit-Blinka',
         'adafruit-circuitpython-busdevice',
         'adafruit-circuitpython-register'
     ],
@@ -55,12 +54,10 @@ setup(
     ],
 
     # What does your project relate to?
-    keywords='adafruit blinka circuitpython micropython circuitpython_i2cencoder DuPPa i2c '
+    keywords='adafruit blinka circuitpython micropython circuitpython_i2c_encoder DuPPa i2c '
              'encoder',
 
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
-    # TODO: IF LIBRARY FILES ARE A PACKAGE FOLDER,
-    #       CHANGE `py_modules=['...']` TO `packages=['...']`
-    py_modules=['circuitpython_i2cencoder'],
+    packages=['i2c_encoder'],
 )

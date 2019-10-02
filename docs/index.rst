@@ -35,7 +35,7 @@ Table of Contents
 .. toctree::
     :caption: Other Links
 
-    Download <https://github.com/schlafsack/CircuitPython_CircuitPython_I2CEncoder/releases/latest>
+    Download <https://github.com/schlafsack/CircuitPython_I2CEncoder/releases/latest>
     CircuitPython Reference Documentation <https://circuitpython.readthedocs.io>
     CircuitPython Support Forum <https://forums.adafruit.com/viewforum.php?f=60>
     Discord Chat <https://adafru.it/discord>

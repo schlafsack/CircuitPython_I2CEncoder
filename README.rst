@@ -1,16 +1,16 @@
 Introduction
 ============
 
-.. image:: https://readthedocs.org/projects/circuitpython-circuitpython_i2cencoder/badge/?version=latest
-    :target: https://circuitpython-circuitpython_i2cencoder.readthedocs.io/
+.. image:: https://readthedocs.org/projects/circuitpython_i2c_encoder/badge/?version=latest
+    :target: https://circuitpython_i2c_encoder.readthedocs.io/
     :alt: Documentation Status
 
 .. image:: https://img.shields.io/discord/327254708534116352.svg
     :target: https://discord.gg/nBQh6qu
     :alt: Discord
 
-.. image:: https://travis-ci.com/schlafsack/CircuitPython_CircuitPython_I2CEncoder.svg?branch=master
-    :target: https://travis-ci.com/schlafsack/CircuitPython_CircuitPython_I2CEncoder
+.. image:: https://travis-ci.com/schlafsack/CircuitPython_I2CEncoder.svg?branch=master
+    :target: https://travis-ci.com/schlafsack/CircuitPython_I2CEncoder
     :alt: Build Status
 
 A CircuitPython driver for the DuPPa I2C Encoder v2.1 board.
@@ -28,36 +28,6 @@ Please ensure all dependencies are available on the CircuitPython filesystem.
 This is easily achieved by downloading
 `the Adafruit library and driver bundle <https://github.com/adafruit/Adafruit_CircuitPython_Bundle>`_.
 
-Installing from PyPI
-=====================
-.. note:: This library is not available on PyPI yet. Install documentation is included
-   as a standard element. Stay tuned for PyPI availability!
-
-.. todo:: Remove the above note if PyPI version is/will be available at time of release.
-   If the library is not planned for PyPI, remove the entire 'Installing from PyPI' section.
-
-On supported GNU/Linux systems like the Raspberry Pi, you can install the driver locally `from
-PyPI <https://pypi.org/project/adafruit-circuitpython-circuitpython_i2cencoder/>`_. To install for current user:
-
-.. code-block:: shell
-
-    pip3 install adafruit-circuitpython-circuitpython-i2cencoder
-
-To install system-wide (this may be required in some cases):
-
-.. code-block:: shell
-
-    sudo pip3 install adafruit-circuitpython-circuitpython-i2cencoder
-
-To install in a virtual environment in your current project:
-
-.. code-block:: shell
-
-    mkdir project-name && cd project-name
-    python3 -m venv .env
-    source .env/bin/activate
-    pip3 install adafruit-circuitpython-circuitpython-i2cencoder
-
 Usage Example
 =============
 
@@ -67,7 +37,7 @@ Contributing
 ============
 
 Contributions are welcome! Please read our `Code of Conduct
-<https://github.com/schlafsack/CircuitPython_CircuitPython_I2CEncoder/blob/master/CODE_OF_CONDUCT.md>`_
+<https://github.com/schlafsack/CircuitPython_I2CEncoder/blob/master/CODE_OF_CONDUCT.md>`_
 before contributing to help this project stay welcoming.
 
 Sphinx documentation
