@@ -46,6 +46,7 @@ Implementation Notes
 """
 
 import sys
+
 from adafruit_bus_device.i2c_device import I2CDevice
 from adafruit_register import i2c_bit, i2c_bits, i2c_struct
 from micropython import const
@@ -62,7 +63,6 @@ except ValueError:
 
 __version__ = "0.0.0-auto.0"
 __repo__ = "https://github.com/schlafsack/CircuitPython_I2CEncoder.git"
-
 
 # Register addresses:
 # pylint: disable=bad-whitespace
@@ -82,8 +82,25 @@ _REG_ISTEP = const(0x14)
 _REG_RLED = const(0x18)
 _REG_GLED = const(0x19)
 _REG_BLED = const(0x1A)
+_REG_GP1 = const(0x1B)
+_REG_GP2 = const(0x1C)
+_REG_GP3 = const(0x1D)
+_REG_ANTBOUNC = const(0x1E)
+_REG_DPPERIOD = const(0x1F)
+_REG_FADERGB = const(0x20)
+_REG_FADEGP = const(0x21)
+_REG_GAMRLED = const(0x27)
+_REG_GAMGLED = const(0x28)
+_REG_GAMBLED = const(0x29)
+_REG_GAMMAGP1 = const(0x2A)
+_REG_GAMMAGP2 = const(0x2B)
+_REG_GAMMAGP3 = const(0x2C)
+_REG_IDCODE = const(0x70)
+_REG_VERSION = const(0x71)
+_REG_EEPROM = const(0x80)
 
 
+# noinspection PyTypeChecker
 class Encoder:
 
     def __init__(self, i2c, device_address):
@@ -110,16 +127,19 @@ class Encoder:
     gconf2_relmod = i2c_bit.RWBit(_REG_GCONF, 0x01)
 
     # GP1CONF
+    gp1conf = i2c_bits.RWBits(8, _REG_GP1CONF, 0x00)
     gp1conf_mode = i2c_bits.RWBits(2, _REG_GP1CONF, 0x00)
     gp1conf_pul = i2c_bit.RWBit(_REG_GP1CONF, 0x02)
     gp1conf_int = i2c_bits.RWBits(2, _REG_GP1CONF, 0x03)
 
     # GP2CONF
+    gp2conf = i2c_bits.RWBits(8, _REG_GP2CONF, 0x00)
     gp2conf_mode = i2c_bits.RWBits(2, _REG_GP2CONF, 0x00)
     gp2conf_pul = i2c_bit.RWBit(_REG_GP2CONF, 0x02)
     gp2conf_int = i2c_bits.RWBits(2, _REG_GP2CONF, 0x03)
 
     # GP3CONF
+    gp3conf = i2c_bits.RWBits(8, _REG_GP3CONF, 0x00)
     gp3conf_mode = i2c_bits.RWBits(2, _REG_GP3CONF, 0x00)
     gp3conf_pul = i2c_bit.RWBit(_REG_GP3CONF, 0x02)
     gp3conf_int = i2c_bits.RWBits(2, _REG_GP3CONF, 0x03)
@@ -135,39 +155,75 @@ class Encoder:
     intconf_int2 = i2c_bit.RWBit(_REG_INTCONF, 0x07)
 
     # ESTATUS - TODO: Break this into a set of flags
-    estatus = i2c_struct.ROUnaryStruct(_REG_ESTATUS, "B")
+    estatus = i2c_bits.ROBits(8, _REG_ESTATUS, 0x00)
 
     # I2STATUS - TODO: Break this into a set of flags
-    i2status = i2c_struct.ROUnaryStruct(_REG_I2STATUS, "B")
+    i2status = i2c_bits.ROBits(8, _REG_I2STATUS, 0x00)
 
     # FSTATUS - TODO: Break this into a set of flags
-    fstatus = i2c_struct.ROUnaryStruct(_REG_FSTATUS, "B")
+    fstatus = i2c_bits.ROBits(8, _REG_FSTATUS, 0x00)
 
     # CVAL FLOAT
-    cval_float = i2c_struct.UnaryStruct(_REG_CVAL, "f")
+    cval_float = i2c_struct.UnaryStruct(_REG_CVAL, ">f")
 
-    # CVAL INT
-    cval_int = i2c_struct.UnaryStruct(_REG_CVAL, "l")
+    # CVAL LONG
+    cval_long = i2c_struct.UnaryStruct(_REG_CVAL, ">l")
 
     # CMAX FLOAT
-    cmax_float = i2c_struct.UnaryStruct(_REG_CMAX, "f")
+    cmax_float = i2c_struct.UnaryStruct(_REG_CMAX, ">f")
 
-    # CMAX INT
-    cmax_int = i2c_struct.UnaryStruct(_REG_CMAX, "l")
+    # CMAX LONG
+    cmax_long = i2c_struct.UnaryStruct(_REG_CMAX, ">l")
 
     # CMIN FLOAT
-    cmin_float = i2c_struct.UnaryStruct(_REG_CMIN, "f")
+    cmin_float = i2c_struct.UnaryStruct(_REG_CMIN, ">f")
 
-    # CMIN INT
-    cmin_int = i2c_struct.UnaryStruct(_REG_CMIN, "l")
+    # CMIN LONG
+    cmin_long = i2c_struct.UnaryStruct(_REG_CMIN, ">l")
 
     # ISTEP FLOAT
-    istep_float = i2c_struct.UnaryStruct(_REG_ISTEP, "f")
+    istep_float = i2c_struct.UnaryStruct(_REG_ISTEP, ">f")
 
     # ISTEP INT
-    istep_int = i2c_struct.UnaryStruct(_REG_ISTEP, "l")
+    istep_long = i2c_struct.UnaryStruct(_REG_ISTEP, ">l")
 
     # R/G/B LED
-    rled = i2c_struct.UnaryStruct(_REG_RLED, "B")
-    gled = i2c_struct.UnaryStruct(_REG_GLED, "B")
-    bled = i2c_struct.UnaryStruct(_REG_BLED, "B")
+    rled = i2c_bits.RWBits(8, _REG_RLED, 0x00)
+    gled = i2c_bits.RWBits(8, _REG_GLED, 0x00)
+    bled = i2c_bits.RWBits(8, _REG_BLED, 0x00)
+
+    # GP 1/2/3
+    gp1 = i2c_bits.RWBits(8, _REG_GP1, 0x00)
+    gp2 = i2c_bits.RWBits(8, _REG_GP2, 0x00)
+    gp3 = i2c_bits.RWBits(8, _REG_GP3, 0x00)
+
+    # ANTI BOUNCE
+    antbounc = i2c_bits.RWBits(8, _REG_ANTBOUNC, 0x00)
+
+    # DP PERIOD
+    dpperiod = i2c_bits.RWBits(8, _REG_DPPERIOD, 0x00)
+
+    # FADE RGB
+    fadergb = i2c_bits.RWBits(8, _REG_FADERGB, 0x00)
+
+    # FADE GP
+    fadegp = i2c_bits.RWBits(8, _REG_FADEGP, 0x00)
+
+    # GAMMA R/G/B
+    gamrled = i2c_bits.RWBits(3, _REG_GAMRLED, 0x00)
+    gamgled = i2c_bits.RWBits(3, _REG_GAMGLED, 0x00)
+    gambled = i2c_bits.RWBits(3, _REG_GAMBLED, 0x00)
+
+    # GAMMA GP 1/2/3
+    gammagp1 = i2c_bits.RWBits(3, _REG_GAMMAGP1, 0x00)
+    gammagp2 = i2c_bits.RWBits(3, _REG_GAMMAGP2, 0x00)
+    gammagp3 = i2c_bits.RWBits(3, _REG_GAMMAGP3, 0x00)
+
+    # ID CODE
+    idcode = i2c_bits.ROBits(8, _REG_IDCODE, 0x00)
+
+    # VERSION
+    version = i2c_bits.ROBits(8, _REG_VERSION, 0x00)
+
+    # EEPROM
+    eeprom = i2c_bits.ROBits(1024, _REG_EEPROM, 0x00, register_width=128)
